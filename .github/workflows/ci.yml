@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential g++ make cmake libgtest-dev
+          # Build and install GoogleTest (libgtest-dev provides sources)
+          sudo cmake -S /usr/src/googletest -B /tmp/build-gtest
+          sudo cmake --build /tmp/build-gtest --target install -j
+
+      - name: Build sequential and parallel binaries
+        run: |
+          make clean
+          make all
+
+      - name: Build and run tests
+        run: |
+          make test
+
+      - name: Build and run benchmark (smoke)
+        run: |
+          make benchmark
+          ./benchmark_seq || true
+          ./benchmark_par || true

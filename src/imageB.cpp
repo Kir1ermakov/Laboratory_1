@@ -2,6 +2,11 @@
 // Б82
 // st130061@student.spbu.ru
 // Laboratory1
+/**
+ * @file imageB.cpp
+ * @brief Реализации функций из модуля обработки изображений.
+ * @ingroup image_processing
+ */
 
 #include "imageB.h"
 #include <iostream>

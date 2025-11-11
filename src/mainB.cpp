@@ -2,6 +2,10 @@
 // Б82
 // st130061@student.spbu.ru
 // Laboratory1
+/**
+ * @file mainB.cpp
+ * @brief Консольная утилита для загрузки изображения, поворота и фильтрации.
+ */
 
 #include <iostream>
 #include "imageB.h"
